@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>OSRS - Online Student Registration System</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">OSRS <span>Online Student Registration System</span></div>
+    <nav id="nav"></nav>
+  </header>
+
+  <main>
+    <div id="toast" class="toast" role="alert"></div>
+
+    <section id="homePage" class="page active">
+      <div class="hero">
+        <div>
+          <p class="eyebrow">University Portal</p>
+          <h1>Online Student Registration System</h1>
+          <p>Register your student account, find courses, submit your registration, and track approval status.</p>
+          <div class="hero-actions">
+            <button class="btn primary" onclick="showPage('loginPage')">Student Login</button>
+            <button class="btn secondary" onclick="showPage('registerPage')">Create Account</button>
+          </div>
+        </div>
+        <div class="hero-card">
+          <h3>Demo credentials</h3>
+          <p><strong>Student:</strong> student@example.com / Student@123</p>
+          <p><strong>Admin:</strong> admin@example.com / Admin@123</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="loginPage" class="page">
+      <div class="card form-card">
+        <h2>Student Login</h2>
+        <p class="muted">Use a registered student account.</p>
+        <form id="loginForm">
+          <label>Email / Username
+            <input id="loginUsername" type="text" autocomplete="username" required>
+          </label>
+          <label>Password
+            <input id="loginPassword" type="password" autocomplete="current-password" required>
+          </label>
+          <button class="btn primary full" type="submit">Login</button>
+        </form>
+        <p class="form-link">New student? <a href="#" onclick="showPage('registerPage'); return false;">Create an account</a></p>
+      </div>
+    </section>
+
+    <section id="registerPage" class="page">
+      <div class="card form-card">
+        <h2>Create Student Account</h2>
+        <p class="muted">All fields are required.</p>
+        <form id="registerForm">
+          <label>Full Name
+            <input id="regName" type="text" required>
+          </label>
+          <label>Email
+            <input id="regEmail" type="email" required>
+          </label>
+          <label>Password
+            <input id="regPassword" type="password" required>
+          </label>
+          <label>Confirm Password
+            <input id="regConfirmPassword" type="password" required>
+          </label>
+          <button class="btn primary full" type="submit">Register</button>
+        </form>
+        <p class="form-link">Already registered? <a href="#" onclick="showPage('loginPage'); return false;">Login</a></p>
+      </div>
+    </section>
+
+    <section id="dashboardPage" class="page protected">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Student Portal</p>
+          <h2 id="welcomeTitle">Student Dashboard</h2>
+        </div>
+        <button class="btn danger" onclick="logout()">Logout</button>
+      </div>
+
+      <div class="stats">
+        <div class="stat"><strong id="selectedCount">0</strong><span>Selected Courses</span></div>
+        <div class="stat"><strong id="registrationStatus">Not Submitted</strong><span>Registration Status</span></div>
+      </div>
+
+      <div class="grid-2">
+        <div class="card">
+          <h3>Search Courses</h3>
+          <form id="searchForm" class="search-row">
+            <input id="searchInput" type="text" placeholder="Try Mathematics" aria-label="Course search">
+            <button class="btn primary" type="submit">Search</button>
+          </form>
+          <div id="searchMessage" class="search-message"></div>
+          <div id="courseResults"></div>
+        </div>
+
+        <div class="card">
+          <h3>My Registration</h3>
+          <div id="selectedCourses"></div>
+          <button id="submitRegistration" class="btn primary full" onclick="submitRegistration()">Submit Registration</button>
+        </div>
+      </div>
+    </section>
+
+    <section id="adminPage" class="page protected">
+      <div class="section-head">
+        <div>
+          <p class="eyebrow">Administrator Portal</p>
+          <h2>Registration Approvals</h2>
+        </div>
+        <button class="btn danger" onclick="logout()">Logout</button>
+      </div>
+      <div class="card">
+        <div id="adminRegistrations"></div>
+      </div>
+    </section>
+
+    <section id="notFoundPage" class="page">
+      <div class="card centered">
+        <h2>Page not available</h2>
+        <p>The requested page could not be found.</p>
+        <button class="btn primary" onclick="showPage('homePage')">Go Home</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>OSRS Demo &middot; University Software Testing Laboratory</p>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
